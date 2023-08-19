@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "387175416621",
+    "project_id": "sociable-3da25",
+    "storage_bucket": "sociable-3da25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387175416621:android:90bc1e5d80daa5fc1e09a4",
+        "android_client_info": {
+          "package_name": "com.psapps.sociableapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387175416621-8h7p3amtr4qm4c8vej7vaccks8covfiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5CzeaqXwKqFzZk5AeXy7Tg5Kf9Te1zc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387175416621-8h7p3amtr4qm4c8vej7vaccks8covfiu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
