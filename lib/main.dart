@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'package:sociable/firebase_options.dart';
+import 'package:sociable/presentation/authentication/screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,12 +19,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Poppins'),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+      theme: ThemeData(
+        fontFamily: 'Poppins',
       ),
+      home: const LoginScreen(),
     );
   }
 }
