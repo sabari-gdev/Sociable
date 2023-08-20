@@ -12,6 +12,8 @@ dependencies:
   firebase_core: ^2.15.1
   flutter:
     sdk: flutter
+  intl_phone_field: ^3.2.0
+  pinput: ^3.0.0
 
 dev_dependencies:
   flutter_test:

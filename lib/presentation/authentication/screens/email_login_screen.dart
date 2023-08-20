@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sociable/core/utils/enums/enums.dart';
 import 'package:sociable/core/utils/theme/styles.dart';
 import 'package:sociable/core/widgets/button/rounded_button.dart';
-import 'package:sociable/presentation/authentication/screens/otp_screen.dart';
+import 'package:sociable/presentation/authentication/screens/complete_profile_screen.dart';
 
-class MobileLoginScreen extends StatelessWidget {
-  MobileLoginScreen({super.key});
-  TextEditingController phoneController = TextEditingController();
+class EmailLoginScreen extends StatelessWidget {
+  const EmailLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +21,33 @@ class MobileLoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Enter your mobile\nnumber",
+                  "Enter your details",
                   style: kHeading1TextStyle,
                 ),
                 const Text(
-                  "We'll send you an OTP code for verification.",
+                  "Please provide your details to continue.",
                   style: kParagraphOneTextStyle,
                 ),
                 const SizedBox(height: 16),
-                IntlPhoneField(
-                  controller: phoneController,
+                TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Mobile Number",
+                    hintText: "Email Address",
                     counterText: "",
                     filled: true,
+                    hintStyle: kParagraphOneTextStyle,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    counterText: "",
+                    filled: true,
+                    hintStyle: kParagraphOneTextStyle,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide.none,
@@ -46,12 +57,12 @@ class MobileLoginScreen extends StatelessWidget {
               ],
             ),
             RoundedButton(
-              text: "Send me the code",
+              text: "Login",
               type: ButtonType.primary,
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const OTPInputScreen(),
+                    builder: (context) => const CompleteProfileScreen(),
                   ),
                 );
               },

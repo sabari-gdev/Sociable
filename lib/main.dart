@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sociable/core/utils/theme/colors.dart';
+import 'package:sociable/core/utils/theme/styles.dart';
 
 import 'package:sociable/firebase_options.dart';
 import 'package:sociable/presentation/authentication/screens/login_screen.dart';
@@ -21,6 +23,14 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Poppins',
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: kChromeBlackColor,
+          ),
+          titleTextStyle: kTitleTextStyle,
+        ),
       ),
       home: const LoginScreen(),
     );

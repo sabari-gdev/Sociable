@@ -8,6 +8,18 @@ const kButtonTextStyle = TextStyle(
   fontFamily: 'Poppins',
 );
 
+const kHeading1TextStyle = TextStyle(
+  fontSize: 24,
+  color: kChromeBlackColor,
+  fontWeight: FontWeight.w600,
+);
+
+const kHeading2TextStyle = TextStyle(
+  fontSize: 20,
+  color: kChromeBlackColor,
+  fontWeight: FontWeight.w600,
+);
+
 const kTitleTextStyle = TextStyle(
   fontSize: 14,
   color: kChromeBlackColor,

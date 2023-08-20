@@ -1,10 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:sociable/core/utils/enums/enums.dart';
 
 import 'package:sociable/core/utils/theme/styles.dart';
 import 'package:sociable/core/widgets/button/rounded_button.dart';
+import 'package:sociable/presentation/authentication/screens/email_login_screen.dart';
+import 'package:sociable/presentation/authentication/screens/email_signup_screen.dart';
 import 'package:sociable/presentation/authentication/screens/mobile_login_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -32,7 +32,30 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const MobileLoginScreen(),
+                    builder: (context) => MobileLoginScreen(),
+                  ),
+                );
+              },
+            ),
+            RoundedButton(
+              text: "Login with Email",
+              icon: Icons.mail,
+              type: ButtonType.primary,
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const EmailLoginScreen(),
+                  ),
+                );
+              },
+            ),
+            RoundedButton(
+              text: "Signup with Email",
+              icon: Icons.mail_outline,
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const EmailSignupScreen(),
                   ),
                 );
               },
@@ -45,13 +68,6 @@ class LoginScreen extends StatelessWidget {
               text: "Continue with Google",
               icon: Icons.g_mobiledata,
             ),
-            const RoundedButton(
-              text: "Continue with Facebook",
-              icon: Icons.facebook_outlined,
-            ),
-            Platform.isIOS
-                ? const RoundedButton(text: "Continue with Apple")
-                : const SizedBox(),
             const Text(
               "By logging in, you agree to the Terms and Conditions. See how\nwe use your data in our Privacy Policy.",
               maxLines: 2,
