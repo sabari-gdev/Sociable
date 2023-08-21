@@ -26,6 +26,12 @@ const kTitleTextStyle = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
+const kTextInputTextStyle = TextStyle(
+  fontSize: 12,
+  color: kChromeBlackColor,
+  fontWeight: FontWeight.w300,
+);
+
 const kParagraphOneTextStyle = TextStyle(
   fontSize: 12,
   color: Colors.grey,

@@ -1,17 +1,24 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'package:sociable/core/utils/theme/colors.dart';
 import 'package:sociable/core/utils/theme/styles.dart';
+import 'package:sociable/features/app/app.dart';
 
 import 'package:sociable/firebase_options.dart';
-import 'package:sociable/presentation/authentication/screens/login_screen.dart';
+import 'package:sociable/features/auth/screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MainApp());
+  final authRepo = AuthRepository();
+
+  runApp(App(
+    authRepository: authRepo,
+  ));
 }
 
 class MainApp extends StatelessWidget {
