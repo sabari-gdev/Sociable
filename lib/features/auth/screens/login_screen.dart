@@ -1,16 +1,16 @@
 import 'package:auth_repository/auth_repository.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:sociable/core/utils/enums/enums.dart';
 
+import 'package:sociable/core/utils/enums/enums.dart';
 import 'package:sociable/core/utils/theme/styles.dart';
+
 import 'package:sociable/core/widgets/button/rounded_button.dart';
+
 import 'package:sociable/features/auth/auth.dart';
-import 'package:sociable/features/auth/screens/email_login_screen.dart';
-import 'package:sociable/features/auth/screens/email_signup_screen.dart';
-import 'package:sociable/features/auth/screens/mobile_login_screen.dart';
-import 'package:sociable/features/home/screens/home_screen.dart';
+import 'package:sociable/features/home/home.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

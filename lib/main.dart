@@ -8,6 +8,7 @@ import 'package:sociable/features/app/app.dart';
 
 import 'package:sociable/firebase_options.dart';
 import 'package:sociable/features/auth/screens/login_screen.dart';
+import 'package:user_repository/user_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,9 +16,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final authRepo = AuthRepository();
+  final userRepo = UserRepository();
 
   runApp(App(
     authRepository: authRepo,
+    userRepository: userRepo,
   ));
 }
 
@@ -30,7 +33,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Poppins',
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           elevation: 0,
           iconTheme: IconThemeData(

@@ -6,10 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:sociable/core/utils/enums/enums.dart';
 import 'package:sociable/core/utils/theme/styles.dart';
 import 'package:sociable/core/widgets/button/rounded_button.dart';
-import 'package:sociable/features/auth/cubits/login/login_cubit.dart';
-
-import 'package:sociable/features/auth/screens/complete_profile_screen.dart';
-import 'package:sociable/features/home/screens/home_screen.dart';
+import 'package:sociable/features/auth/auth.dart';
 
 class EmailLoginScreen extends StatelessWidget {
   const EmailLoginScreen({super.key});
@@ -73,9 +70,9 @@ class _LoginForm extends StatelessWidget {
             );
         }
         if (state.status.isSuccess) {
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
+              builder: (context) => const SetUserAvatarScreen(),
             ),
           );
         }

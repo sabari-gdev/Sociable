@@ -6,22 +6,28 @@ import 'package:sociable/core/utils/helpers/routes/routes.dart';
 import 'package:sociable/core/utils/theme/colors.dart';
 import 'package:sociable/core/utils/theme/styles.dart';
 import 'package:sociable/features/app/bloc/app_bloc.dart';
-import 'package:sociable/features/auth/screens/login_screen.dart';
+import 'package:user_repository/user_repository.dart';
 
 class App extends StatelessWidget {
   final AuthRepository _authRepository;
-  const App({
-    super.key,
-    required AuthRepository authRepository,
-  }) : _authRepository = authRepository;
+  final UserRepository _userRepository;
+  const App(
+      {super.key,
+      required AuthRepository authRepository,
+      required UserRepository userRepository})
+      : _authRepository = authRepository,
+        _userRepository = userRepository;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: _authRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: _authRepository),
+        RepositoryProvider.value(value: _userRepository)
+      ],
       child: BlocProvider(
         create: (_) => AppBloc(authenticationRepository: _authRepository),
-        child: AppView(),
+        child: const AppView(),
       ),
     );
   }

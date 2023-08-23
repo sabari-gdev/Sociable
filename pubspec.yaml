@@ -11,6 +11,8 @@ dependencies:
     path: repositories/auth
   form_validator:
     path: packages/form_validator
+  user_repository:
+    path: repositories/user
   bloc: ^8.1.2
   cloud_firestore: ^4.8.5
   equatable: ^2.0.5
@@ -24,6 +26,7 @@ dependencies:
   formz: ^0.6.0
   google_sign_in: ^6.1.4
   flow_builder: ^0.0.9
+  image_picker: ^1.0.2
 
 dev_dependencies:
   flutter_test:

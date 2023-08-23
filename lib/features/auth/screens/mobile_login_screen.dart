@@ -6,8 +6,7 @@ import 'package:sociable/core/widgets/button/rounded_button.dart';
 import 'package:sociable/features/auth/screens/otp_screen.dart';
 
 class MobileLoginScreen extends StatelessWidget {
-  MobileLoginScreen({super.key});
-  TextEditingController phoneController = TextEditingController();
+  const MobileLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,6 @@ class MobileLoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 IntlPhoneField(
-                  controller: phoneController,
                   decoration: InputDecoration(
                     hintText: "Mobile Number",
                     counterText: "",

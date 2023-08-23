@@ -6,6 +6,7 @@ import 'package:sociable/core/utils/enums/enums.dart';
 import 'package:sociable/core/utils/theme/styles.dart';
 import 'package:sociable/core/widgets/button/rounded_button.dart';
 import 'package:sociable/features/auth/auth.dart';
+import 'package:user_repository/user_repository.dart';
 
 class EmailSignupScreen extends StatelessWidget {
   const EmailSignupScreen({super.key});
@@ -17,6 +18,7 @@ class EmailSignupScreen extends StatelessWidget {
       body: BlocProvider(
         create: (_) => SignUpCubit(
           authRepository: context.read<AuthRepository>(),
+          userRepository: context.read<UserRepository>(),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),

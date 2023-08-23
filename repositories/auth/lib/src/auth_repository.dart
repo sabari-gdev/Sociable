@@ -22,6 +22,10 @@ class AuthRepository {
       });
 
   UserModel get getAuthUser {
+    final user = _firebaseAuth.currentUser;
+    if (user != null) {
+      return user.toUserEntity;
+    }
     return UserModel.empty;
   }
 
