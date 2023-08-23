@@ -7,6 +7,7 @@ import 'package:sociable/core/utils/enums/enums.dart';
 import 'package:sociable/core/utils/theme/styles.dart';
 import 'package:sociable/core/widgets/button/rounded_button.dart';
 import 'package:sociable/features/auth/auth.dart';
+import 'package:sociable/features/home/home.dart';
 
 class EmailLoginScreen extends StatelessWidget {
   const EmailLoginScreen({super.key});
@@ -72,7 +73,7 @@ class _LoginForm extends StatelessWidget {
         if (state.status.isSuccess) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const SetUserAvatarScreen(),
+              builder: (context) => const HomeScreen(),
             ),
           );
         }

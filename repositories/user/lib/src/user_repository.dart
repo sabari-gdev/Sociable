@@ -33,14 +33,12 @@ class UserRepository {
         );
   }
 
-  Future<void> updateUserDetails(UserDocument data) async {
+  Future<void> updateUserDetails(Map<String, dynamic> data) async {
     final CollectionReference usersCollection = _firestore.collection('users');
 
     await usersCollection
-        .doc(data.uid)
-        .update({
-          "username": data.userName,
-        })
+        .doc(_firebaseAuth.currentUser?.uid)
+        .update(data)
         .then((value) => print("Updated successfully!"))
         .onError(
           (error, stackTrace) => print("Error: $error"),
@@ -55,13 +53,12 @@ class UserRepository {
           .child('avatars')
           .child(_firebaseAuth.currentUser!.uid);
 
-      final task = storageRef.putFile(image);
-      final taskSnapshot = task.snapshot;
-      if (taskSnapshot.state == TaskState.success) {
-        return storageRef.getDownloadURL();
-      } else {
-        return null;
-      }
+      final task = await storageRef.putFile(image);
+      final taskSnapshot = task.state;
+      if (taskSnapshot == TaskState.success) log("Image upload Success!");
+      final url = await storageRef.getDownloadURL();
+
+      return url;
     } on FirebaseException catch (e) {
       log("Exception: ${e.code}");
       throw Exception(e);

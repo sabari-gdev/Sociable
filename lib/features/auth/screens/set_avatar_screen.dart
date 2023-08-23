@@ -45,6 +45,16 @@ class SetUserAvatarScreen extends StatelessWidget {
                 onPressed: () {},
               ),
               _ChooseFromGalleryButton(),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const HomeScreen(),
+                    ),
+                  );
+                },
+                child: Text("Skip for Now"),
+              ),
             ],
           ),
         ),
