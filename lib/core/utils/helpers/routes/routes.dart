@@ -4,7 +4,9 @@ import 'package:sociable/features/auth/auth.dart';
 import 'package:sociable/features/home/screens/home_screen.dart';
 
 List<Page<dynamic>> onGeneratePages(
-    AppStatus state, List<Page<dynamic>> pages) {
+  AppStatus state,
+  List<Page<dynamic>> pages,
+) {
   switch (state) {
     case AppStatus.authenticated:
       return [HomeScreen.page()];

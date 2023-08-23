@@ -16,6 +16,7 @@ class AuthRepository {
 
   Stream<UserModel> get currentUser =>
       _firebaseAuth.authStateChanges().map((firebaseUser) {
+        log("USR CHANGE TRIGGERED: $firebaseUser");
         final user =
             firebaseUser == null ? UserModel.empty : firebaseUser.toUserEntity;
         return user;

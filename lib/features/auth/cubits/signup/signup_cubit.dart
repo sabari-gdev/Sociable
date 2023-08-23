@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:auth_repository/auth_repository.dart';
@@ -48,6 +49,24 @@ class SignUpCubit extends Cubit<SignUpState> {
         isValid: Formz.validate([
           state.email,
           formattedPassword,
+          confirmedPassword,
+        ]),
+      ),
+    );
+  }
+
+  void confirmedPasswordChanged(String confirmPassword) {
+    final confirmedPassword = ConfirmedPassword.dirty(
+      password: state.password.value,
+      value: state.confirmedPassword.value,
+    );
+    emit(
+      state.copyWith(
+        password: state.password,
+        confirmedPassword: confirmedPassword,
+        isValid: Formz.validate([
+          state.email,
+          state.password,
           confirmedPassword,
         ]),
       ),
@@ -116,23 +135,6 @@ class SignUpCubit extends Cubit<SignUpState> {
         state.copyWith(isAgreedToTerms: value),
       );
 
-  void confirmedPasswordChanged(String value) {
-    final confirmedPassword = ConfirmedPassword.dirty(
-      password: state.password.value,
-      value: value,
-    );
-    emit(
-      state.copyWith(
-        confirmedPassword: confirmedPassword,
-        isValid: Formz.validate([
-          state.email,
-          state.password,
-          confirmedPassword,
-        ]),
-      ),
-    );
-  }
-
   Future<void> pickImageFromGallery() async {
     final ImagePicker imagePicker = ImagePicker();
 
@@ -176,11 +178,8 @@ class SignUpCubit extends Cubit<SignUpState> {
     if (!state.isValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      final UserDocument userDocument = UserDocument(
-        uid: _authenticationRepository.getAuthUser.uid,
-        userName: state.username.value,
-      );
-      await _userRepository.updateUserDetails(userDocument);
+      await _userRepository
+          .updateUserDetails({"username": state.username.value});
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (e) {
       emit(
@@ -195,9 +194,13 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> uploadAvatar() async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      await _userRepository.uploadImage(
+      final imageURL = await _userRepository.uploadImage(
         image: state.pickedAvatar!,
       );
+
+      log("PROFILE_URL: $imageURL");
+
+      await _userRepository.updateUserDetails({"profile": imageURL});
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (e) {
       emit(

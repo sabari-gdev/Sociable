@@ -27,11 +27,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   late final StreamSubscription<UserModel> _userSubscription;
 
   void _onUserChanged(_AppUserChanged event, Emitter<AppState> emit) {
+    print("USER CHANGE: ${event.user.uid}");
     emit(
       event.user.isNotEmpty
           ? AppState.authenticated(event.user)
           : const AppState.unauthenticated(),
     );
+    print("App State CHANGE: ${state.status.name}");
   }
 
   void _onLogoutRequested(AppLogoutRequested event, Emitter<AppState> emit) {
