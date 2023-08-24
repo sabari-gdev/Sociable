@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 
-import 'package:user_repository/src/models/user_details.dart';
+import 'package:user_repository/src/models/user_document/user_document.dart';
 
 class UserRepository {
   final FirebaseFirestore _firestore;
@@ -19,12 +19,23 @@ class UserRepository {
         _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance,
         _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance;
 
+  Stream<UserDocument> get getRealtimeUserDoc => _firestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser?.uid)
+          .snapshots()
+          .map(
+        (event) {
+          log("DOC CHANGE TRIGGERED: ${event.data()}");
+          return UserDocument.fromFirestore(event.data()!);
+        },
+      );
+
   Future<void> addUserDetails(UserDocument user) async {
     final CollectionReference usersCollection = _firestore.collection('users');
     final newUserDocument = usersCollection.doc(_firebaseAuth.currentUser?.uid);
 
     await newUserDocument
-        .set(user.toJson())
+        .set(user.toFirestore())
         .then(
           (_) => log("User Details Added to the document."),
         )
@@ -64,6 +75,22 @@ class UserRepository {
       throw Exception(e);
     } catch (_) {
       throw Exception("Exception occured");
+    }
+  }
+
+  Future<bool> userDocumentExists() async {
+    final userDoc = await _firestore
+        .collection('users')
+        .where(
+          'uid',
+          isEqualTo: _firebaseAuth.currentUser?.uid,
+        )
+        .get();
+
+    if (userDoc.docs.isEmpty) {
+      return false;
+    } else {
+      return true;
     }
   }
 }
