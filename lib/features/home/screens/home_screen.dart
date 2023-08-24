@@ -30,20 +30,14 @@ class _HomeNavigationView extends StatelessWidget {
         context.select((HomeCubit homeCubit) => homeCubit.state.tabIndex);
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24.0,
-            vertical: 16,
-          ),
-          child: IndexedStack(
-            index: selectedTab,
-            children: const [
-              FeedScreen(),
-              ChatScreen(),
-              AlertsScreen(),
-              ProfileScreen(),
-            ],
-          ),
+        child: IndexedStack(
+          index: selectedTab,
+          children: const [
+            FeedScreen(),
+            ChatScreen(),
+            AlertsScreen(),
+            ProfileScreen(),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

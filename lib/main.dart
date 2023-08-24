@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:sociable/core/utils/theme/colors.dart';
-import 'package:sociable/core/utils/theme/styles.dart';
+
 import 'package:sociable/features/app/app.dart';
 
 import 'package:sociable/firebase_options.dart';
@@ -39,7 +39,6 @@ class MainApp extends StatelessWidget {
           iconTheme: IconThemeData(
             color: kChromeBlackColor,
           ),
-          titleTextStyle: kTitleTextStyle,
         ),
       ),
       home: const LoginScreen(),

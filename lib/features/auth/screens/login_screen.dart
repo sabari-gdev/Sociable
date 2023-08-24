@@ -10,7 +10,8 @@ import 'package:sociable/core/utils/theme/styles.dart';
 import 'package:sociable/core/widgets/button/rounded_button.dart';
 
 import 'package:sociable/features/auth/auth.dart';
-import 'package:sociable/features/home/home.dart';
+
+import 'package:user_repository/user_repository.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -74,8 +75,10 @@ class LoginScreen extends StatelessWidget {
               style: kParagraphOneTextStyle,
             ),
             BlocProvider(
-              create: (context) =>
-                  LoginCubit(authRepository: context.read<AuthRepository>()),
+              create: (context) => LoginCubit(
+                authRepository: context.read<AuthRepository>(),
+                userRepository: context.read<UserRepository>(),
+              ),
               child: _GoogleSignInButton(),
             ),
             const Text(
@@ -97,11 +100,11 @@ class _GoogleSignInButton extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state.status.isSuccess) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
-            ),
-          );
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //     builder: (context) => const HomeScreen(),
+          //   ),
+          // );
         }
       },
       builder: (context, state) {

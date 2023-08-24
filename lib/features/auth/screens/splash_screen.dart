@@ -15,13 +15,13 @@ class SplashScreen extends StatelessWidget {
       listener: (_, state) {
         if (state.status == AppStatus.authenticated) {
           debugPrint('authenticated');
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => const HomeScreen(),
             ),
           );
         } else {
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => const LoginScreen(),
             ),

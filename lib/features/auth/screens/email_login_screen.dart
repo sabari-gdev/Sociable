@@ -8,6 +8,7 @@ import 'package:sociable/core/utils/theme/styles.dart';
 import 'package:sociable/core/widgets/button/rounded_button.dart';
 import 'package:sociable/features/auth/auth.dart';
 import 'package:sociable/features/home/home.dart';
+import 'package:user_repository/user_repository.dart';
 
 class EmailLoginScreen extends StatelessWidget {
   const EmailLoginScreen({super.key});
@@ -21,8 +22,10 @@ class EmailLoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: BlocProvider(
-        create: (_) =>
-            LoginCubit(authRepository: context.read<AuthRepository>()),
+        create: (_) => LoginCubit(
+          authRepository: context.read<AuthRepository>(),
+          userRepository: context.read<UserRepository>(),
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
           child: Column(

@@ -58,11 +58,10 @@ class SignUpCubit extends Cubit<SignUpState> {
   void confirmedPasswordChanged(String confirmPassword) {
     final confirmedPassword = ConfirmedPassword.dirty(
       password: state.password.value,
-      value: state.confirmedPassword.value,
+      value: confirmPassword,
     );
     emit(
       state.copyWith(
-        password: state.password,
         confirmedPassword: confirmedPassword,
         isValid: Formz.validate([
           state.email,
@@ -155,12 +154,15 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       final UserDocument userDocument = UserDocument(
-        uid: _authenticationRepository.getAuthUser.uid,
         firstName: state.firstName.value,
         lastName: state.lastName.value,
         bio: state.bio.value,
         email: _authenticationRepository.getAuthUser.email,
         profile: _authenticationRepository.getAuthUser.profilePic,
+        createdAt: DateTime.now(),
+        followers: 0,
+        following: 0,
+        posts: 0,
       );
       await _userRepository.addUserDetails(userDocument);
       emit(state.copyWith(status: FormzSubmissionStatus.success));
@@ -179,7 +181,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _userRepository
-          .updateUserDetails({"username": state.username.value});
+          .updateUserDetails({"userName": state.username.value});
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (e) {
       emit(

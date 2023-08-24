@@ -1,16 +1,23 @@
+import 'dart:developer';
+
 import 'package:auth_repository/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:formz/formz.dart';
+import 'package:user_repository/user_repository.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final AuthRepository _authRepository;
+  final UserRepository _userRepository;
 
-  LoginCubit({required AuthRepository authRepository})
+  LoginCubit(
+      {required AuthRepository authRepository,
+      required UserRepository userRepository})
       : _authRepository = authRepository,
+        _userRepository = userRepository,
         super(const LoginState());
 
   void emailChanged(String email) {
@@ -61,7 +68,12 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _authRepository.loginWithGoogle();
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
+      final userDetailsExists = await _userRepository.userDocumentExists();
+
+      if (userDetailsExists) {
+        log('User details exists');
+        emit(state.copyWith(status: FormzSubmissionStatus.success));
+      }
     } on LogInWithGoogleFailure catch (e) {
       emit(
         state.copyWith(

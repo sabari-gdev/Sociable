@@ -120,6 +120,7 @@ extension on auth.User {
       uid: uid,
       email: email,
       profilePic: photoURL,
+      displayName: displayName,
     );
   }
 }
