@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sociable/core/utils/theme/colors.dart';
 import 'package:sociable/features/alerts/screens/alerts_screen.dart';
 import 'package:sociable/features/chats/screens/chat_screen.dart';
-import 'package:sociable/features/feed/screens/feed_screen.dart';
+import 'package:sociable/features/posts/screens/feed_screen.dart';
 import 'package:sociable/features/home/cubit/home_cubit.dart';
 import 'package:sociable/features/profile/screens/profile_screen.dart';
 
@@ -26,12 +26,12 @@ class HomeScreen extends StatelessWidget {
 class _HomeNavigationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final int selectedTab =
+    final int selectedTabIndex =
         context.select((HomeCubit homeCubit) => homeCubit.state.tabIndex);
     return Scaffold(
       body: SafeArea(
         child: IndexedStack(
-          index: selectedTab,
+          index: selectedTabIndex,
           children: const [
             FeedScreen(),
             ChatScreen(),
@@ -41,7 +41,7 @@ class _HomeNavigationView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedTab,
+        currentIndex: selectedTabIndex,
         items: const [
           BottomNavigationBarItem(
             activeIcon: Icon(Icons.home),
